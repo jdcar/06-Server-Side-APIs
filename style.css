@@ -1,0 +1,17 @@
+
+/* Search button */
+.btn-outline-success {
+    color: black;
+    border-color: black;
+    background-color: white;
+}
+
+.btn-outline-success:hover{
+    background-color: black;
+    border-color: black;
+
+}
+
+#sidebar {
+    background-color: lightgray;
+}
