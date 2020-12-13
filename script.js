@@ -14,94 +14,81 @@ displayCurrent()
 
 // Get current weather
 var apiKey = "e96e2d58ecbe86104285358be908972d"
-var city = "Chicago";
-var state = "Illinois";
+var cityInput = "";
+var stateInput = "";
 
 // event listener
 $("#searchButton").on("click", function (event) {
 
     event.preventDefault();
     // grab search inputs for city and state
-    var cityInput = $('#city-input').val()
-    var stateInput = $('#state-input').val()
+    cityInput = $('#city-input').val()
+    stateInput = $('#state-input').val()
+
+    // search history save
+    var searchHistory = $("#search-history")
+    var searchHistoryList = $("<li class='list-group-item'>").text(cityInput + ", " + stateInput)
+    searchHistory.prepend(searchHistoryList)
+    // 
 
     // query for just city
-    var queryURLnoState = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}`;
+    var queryURLnoState = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&units=imperial&appid=${apiKey}`;
 
     // query for city-state
-    var queryURLwithState = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput},${stateInput}&appid=${apiKey}`
+    var queryURLwithState = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput},${stateInput}&units=imperial&appid=${apiKey}`
+
+    var url = ""
 
     if (cityInput != "" && stateInput != "") {
 
-        $.ajax({
-            url: queryURLwithState,
-            method: "GET"
-        }).then(function (response) {
-            console.log(response.wind.speed)
-            // temperture
-            var temp = response.main.temp
-            $('#temperature').append(temp + " degrees")
-
-            // humidity
-            var humidity = response.main.humidity
-            $('#humidity').append(humidity + "%")
-            // wind 
-            var wind = response.wind.speed
-            $('#wind-speed').append(wind + " mph")
-            // latitude
-            var lat = response.coord.lat
-            // longitute
-            var lon = response.coord.lon
-
-            var queryForUv = `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiKey}`
-
-            $.ajax({
-                url: queryForUv,
-                method: "GET"
-            }).then(function (response) {
-    
-                console.log(response.value)
-
-                var uvIndex = response.value
-                $('#uv-index').append(uvIndex)
-    
-                // uv index
-                // response. 
-    
-            });
-
-            
-
-
-        });
-    } else if (cityInput != "" && stateInput === "") {
-
-        $.ajax({
-            url: queryURLnoState,
-            method: "GET"
-        }).then(function (response) {
-
-            console.log(response)
-
-            // temperture
-            // humidity
-            // wind 
-            // uv index
-
-        });
+        url = queryURLwithState
+    } else {
+        url = queryURLnoState
     }
 
 
+    $.ajax({
+        url: url,
+        method: "GET"
+    }).then(function (response) {
 
+        // city name
+        var cityName = response.name
+        $('#city-name').text(cityName)
+        // temperture
+        var temp = response.main.temp
+        $('#temperature').text("Temperature: " + temp + "°F")
+
+        // humidity
+        var humidity = response.main.humidity
+        $('#humidity').text("Humidity: " + humidity + "%")
+        // wind 
+        var wind = response.wind.speed
+        $('#wind-speed').text("Wind speed: " + wind + " mph")
+        // latitude
+        var lat = response.coord.lat
+        // longitute
+        var lon = response.coord.lon
+
+        var queryForUv = `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiKey}`
+
+        $.ajax({
+            url: queryForUv,
+            method: "GET"
+        }).then(function (response) {
+
+            var uvIndex = response.value
+            $('#uv-index').text("UV Index: " + uvIndex)
+
+        });
+    });
 });
 
-// function getWeather () {
-
-//     console.log(reponse.)
-//             // temperture
-//             // humidity
-//             // wind 
-//             // uv index
 
 
-// }
+
+// five day 
+// add ons:
+    // country
+    // add image of city
+    // page load spinner
