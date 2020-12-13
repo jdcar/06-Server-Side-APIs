@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-<!-- bootstrap -->
+    <!-- bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<!-- CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+
 
 </head>
 
@@ -25,16 +27,36 @@
 
         <div class="row">
             <!-- <div class="col-9">.col-9</div> -->
-            <div class="col-4"  id="sidebar"><br>
+            <div class="col-4" id="sidebar"><br>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <input id ="city-input" class="form-control mr-sm-2" type="search" placeholder="City" aria-label="Search">
+                    <input id="state-input" class="form-control mr-sm-2" type="search" placeholder="State (optional)" aria-label="Search">
+                    <button id="searchButton" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
+
+                <!-- search history -->
+                <ul id="search-history" class="list-group">
+                    <li class="list-group-item">Chicago</li>
+                </ul>
+
+
             </div>
             <!-- search -->
-            <div class="col-8">.col-8<br>
-                <div class="five-day">Row1</div>
-                <div class="five-day">Row2</div>
+            <div class="col-8"><br>
+                <div class="current-weather">
+                    <div class="jumbotron">
+                        <h1 class="display-4">City name</h1>
+                        <p id="today" class="lead"></p>
+                        <p id="temperature">Temperature</p>
+                        <p id="humidity">Humidity</p>
+                        <p id="wind-speed">Wind speed</p>
+                        <p id="uv-index">UV Index</p>
+                        <hr class="my-4">
+                        <p>Five Day Forecast</p>
+                        <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
+                    </div>
+                </div>
+                <!-- <div class="five-day">Row2</div> -->
             </div>
         </div>
 
@@ -55,15 +77,15 @@
 
 
     </div>
-    <!-- <script src="script.js"> -->
+    <script>
 
 
-
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="luxon.js"></script>
+    <script src="script.js"></script>
+  
 </body>
 
 </html>

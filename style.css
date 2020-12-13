@@ -15,3 +15,7 @@
 #sidebar {
     background-color: lightgray;
 }
+
+.list-group {
+    margin-bottom: 25px;
+}
