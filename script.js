@@ -13,7 +13,7 @@ displayCurrent()
 
 
 // Get current weather
-var apiKey = "e96e2d58ecbe86104285358be908972d"
+
 var cityInput = "";
 var stateInput = "";
 
@@ -52,6 +52,8 @@ $("#searchButton").on("click", function (event) {
         method: "GET"
     }).then(function (response) {
 
+        // console.log(response)
+
         // city name
         var cityName = response.name
         $('#city-name').text(cityName)
@@ -69,6 +71,8 @@ $("#searchButton").on("click", function (event) {
         var lat = response.coord.lat
         // longitute
         var lon = response.coord.lon
+        // city id
+        var cityId = response.id
 
         var queryForUv = `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiKey}`
 
@@ -81,6 +85,35 @@ $("#searchButton").on("click", function (event) {
             $('#uv-index').text("UV Index: " + uvIndex)
 
         });
+
+        // 5 day forecast 
+
+        var urlFiveDay = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${apiKey}`
+
+
+        $.ajax({
+            url: urlFiveDay,
+            method: "GET"
+        }).then(function (response) {
+
+            console.log(response)
+
+            // include temp and humidity
+            
+            var nextDay1 = response.list[1]
+            var nextDay2 = response.list[2]
+            var nextDay2 = response.list[3]
+            var nextDay2 = response.list[4]
+            var nextDay2 = response.list[5]
+
+            console.log(nextDay1)
+
+
+        });
+
+
+
+
     });
 });
 
