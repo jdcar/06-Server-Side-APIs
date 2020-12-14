@@ -79,14 +79,14 @@ $("#searchButton").on("click", function (event) {
         $('#city-name').text(cityName)
         // temperture
         var temp = response.main.temp
-        $('#temperature').text("Temperature: " + temp + "°F")
+        $('#temperature').text("Temperature: " + parseInt(temp) + "°F")
 
         // humidity
         var humidity = response.main.humidity
         $('#humidity').text("Humidity: " + humidity + "%")
         // wind 
         var wind = response.wind.speed
-        $('#wind-speed').text("Wind speed: " + wind + " mph")
+        $('#wind-speed').text("Wind speed: " + parseInt(wind) + " mph")
         // latitude
         var lat = response.coord.lat
         // longitute
@@ -133,42 +133,42 @@ $("#searchButton").on("click", function (event) {
                 if (response.list[i].dt_txt.includes("12:00:00")) {
                     count++;
 
-                    // console.log(response.list[i].weather[0].icon)
-                    // var iconSmall = response.weather[0].icon
-
                     var dateWithoutTime = response.list[i].dt_txt.replace(/(.....)(.+)(12:00:00)/, "$2")
                     dateWithoutTime = dateWithoutTime.replace("-", "/")
-                   
+
 
                     var days = $('#day-' + count)
                     var daysForecast = $("<span>").text(dateWithoutTime)
                     days.append(daysForecast)
 
                     var temps = $('#temp-' + count)
-                    var tempsForecast = $("<span>").text(response.list[i].main.temp)
+                    var tempsForecast = $("<span>").text(parseInt(response.list[i].main.temp))
                     temps.append(tempsForecast).append("°F")
 
                     var humiditys = $('#humid-' + count)
                     var humiditysForecast = $("<span>").text(response.list[i].main.humidity)
                     humiditys.append(humiditysForecast).append("%")
+                     
+                    var iconSmall = $('#temp-' + count)
+                    var iconsForecast = $(`<img id="icons" src= ${"https://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + ".png"} />`)
+                    iconSmall.append(iconsForecast)
 
-                    // console.log(iconURL)
-                    // var iconURLsmall = "https://openweathermap.org/img/wn/" + iconSmall + ".png"
-
-                    // var icons = $('#smallIcon' + count)
-                    // var iconsForecast = $(`<img src= ${iconURLsmall} />`)
-                    // icons.append(iconsForecast)
                 }
             }
         });
     });
 });
 
+// Render last search into local storage
 
 
+// WHEN I view the UV index
+    // THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
+// WHEN I click on a city in the search history
+// THEN I am again presented with current and future conditions for that city
+// WHEN I open the weather dashboard
+// THEN I am presented with the last searched city forecast
 
-// five day 
-    // icons
 // add ons:
     // country
     // page load spinner
