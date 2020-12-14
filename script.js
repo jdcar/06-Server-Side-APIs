@@ -117,15 +117,16 @@ $("#searchButton").on("click", function (event) {
 
                 if (response.list[i].dt_txt.includes("12:00:00")) {
                     count++;
-                    // console.log(response.list[i].dt_txt + " day-" + count)
-                    // console.log(response.list[i].main.temp)
-                    // console.log(response.list[i].main.humidity)
+
                     // console.log(response.list[i].weather[0].icon)
                     // var iconSmall = response.weather[0].icon
 
+                    var dateWithoutTime = response.list[i].dt_txt.replace(/(.....)(.+)(12:00:00)/, "$2")
+                    dateWithoutTime = dateWithoutTime.replace("-", "/")
+                   
 
                     var days = $('#day-' + count)
-                    var daysForecast = $("<span>").text(response.list[i].dt_txt)
+                    var daysForecast = $("<span>").text(dateWithoutTime)
                     days.append(daysForecast)
 
                     var temps = $('#temp-' + count)
@@ -152,7 +153,7 @@ $("#searchButton").on("click", function (event) {
 
 
 // five day 
+    // icons
 // add ons:
     // country
-    // add image of city
     // page load spinner

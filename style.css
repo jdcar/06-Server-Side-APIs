@@ -14,8 +14,21 @@
 
 #sidebar {
     background-color: lightgray;
+    margin-top: 25px;
 }
 
 .list-group {
     margin-bottom: 25px;
+}
+/* "Cumulonimbus clouds; Desert Queen Valley" by Joshua Tree National Park is marked with CC PDM 1.0 */
+body {
+    background-image: url("https://live.staticflickr.com/2927/14046300140_5d7b04ca9f_b.jpg");
+}
+
+.jumbotron {
+    background-color: #FFFFF0	;
+}
+
+.navbar {
+    text-align: center;
 }
