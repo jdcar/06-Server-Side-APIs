@@ -29,8 +29,10 @@
             <!-- <div class="col-9">.col-9</div> -->
             <div class="col-4" id="sidebar"><br>
                 <form class="form-inline my-2 my-lg-0">
-                    <input id ="city-input" class="form-control mr-sm-2" type="search" placeholder="City" aria-label="Search">
-                    <input id="state-input" class="form-control mr-sm-2" type="search" placeholder="State (optional)" aria-label="Search">
+                    <input id="city-input" class="form-control mr-sm-2" type="search" placeholder="City"
+                        aria-label="Search">
+                    <input id="state-input" class="form-control mr-sm-2" type="search"
+                        placeholder="State/country (optional)" aria-label="Search">
                     <button id="searchButton" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
 
@@ -45,47 +47,70 @@
             <div class="col-8"><br>
                 <div class="current-weather">
                     <div class="jumbotron">
-                        <h2 id = "city-name" class="display-4">City name</h2>
+                        <h2 id="city-name" class="display-4">City name</h2>
+                        <div id="current-icon"></div>
                         <p id="today" class="lead"></p>
                         <p id="temperature">Temperature: </p>
                         <p id="humidity">Humidity: </p>
                         <p id="wind-speed">Wind speed: </p>
                         <p id="uv-index">UV Index: </p>
                         <hr class="my-4">
-                        <p>Five Day Forecast</p>
+                        <h3>Five Day Forecast</h3>
                         <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
+
+                        <div class="card-group">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title forecast" id="day-1"></h5>
+                                    <p class="forecast" id = "temp-1"></p>
+                                    <p class="forecast" id = "humid-1"></p>
+                                    <p class="forecast" id = "smallIcon-1"></p>
+
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title forecast" id="day-2"></h5>
+                                    <p class="forecast" id = "temp-2"></p>
+                                    <p class="forecast" id = "humid-2"></p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title forecast" id="day-3"></h5>
+                                    <p class="forecast" id = "temp-3"></p>
+                                    <p class="forecast" id = "humid-3"></p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title forecast" id="day-4"></h5>
+                                    <p class="forecast" id = "temp-4"></p>
+                                    <p class="forecast" id = "humid-4"></p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title forecast" id="day-5"></h5>
+                                    <p class="forecast" id = "temp-5"></p>
+                                    <p class="forecast" id = "humid-5"></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- <div class="five-day">Row2</div> -->
             </div>
         </div>
-
-        </row>
-
+        <script>
 
 
+        </script>
+        <script type='text/javascript' src='configs.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="luxon.js"></script>
+        <script src="script.js"></script>
 
-        <!-- Sidebar left 
-    
-    Preset cities
-
-
-
-    Main page
-    Search result city
-    5 day forecast -->
-
-
-    </div>
-    <script>
-
-
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="luxon.js"></script>
-    <script src="script.js"></script>
-  
 </body>
 
 </html>

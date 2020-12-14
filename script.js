@@ -1,4 +1,6 @@
 
+document.cookie = "Set-Cookie: SameSite=None; Secure"
+
 // Insert current date/time into DOM
 var DateTime = luxon.DateTime;
 function displayCurrent() {
@@ -6,13 +8,14 @@ function displayCurrent() {
     var now = DateTime.local().toLocaleString(DateTime.DATETIME_FULL)
 
     current = $('#today').text(now)
-    setInterval(displayCurrent, 1000);
+    setInterval(displayCurrent, 60 * 1000);
 }
 
 displayCurrent()
 
 
 // Get current weather
+var apiKey = configs.MY_KEY;
 
 var cityInput = "";
 var stateInput = "";
@@ -20,14 +23,16 @@ var stateInput = "";
 // event listener
 $("#searchButton").on("click", function (event) {
 
+
     event.preventDefault();
     // grab search inputs for city and state
+    $('.forecast').text("")
     cityInput = $('#city-input').val()
     stateInput = $('#state-input').val()
 
     // search history save
     var searchHistory = $("#search-history")
-    var searchHistoryList = $("<li class='list-group-item'>").text(cityInput + ", " + stateInput)
+    var searchHistoryList = $("<li class='list-group-item'>").text(cityInput + " " + stateInput)
     searchHistory.prepend(searchHistoryList)
     // 
 
@@ -74,6 +79,16 @@ $("#searchButton").on("click", function (event) {
         // city id
         var cityId = response.id
 
+        // ICON insert-----
+
+        var iconLarge = response.weather[0].icon
+
+        var iconURLlarge = "https://openweathermap.org/img/wn/" + iconLarge + "@2x.png"
+
+
+        $('#city-name').append(`<img id="icons" src= ${iconURLlarge} />`)
+
+
         var queryForUv = `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiKey}`
 
         $.ajax({
@@ -88,7 +103,7 @@ $("#searchButton").on("click", function (event) {
 
         // 5 day forecast 
 
-        var urlFiveDay = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${apiKey}`
+        var urlFiveDay = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&units=imperial&appid=${apiKey}`
 
 
         $.ajax({
@@ -96,24 +111,40 @@ $("#searchButton").on("click", function (event) {
             method: "GET"
         }).then(function (response) {
 
-            console.log(response)
-
             // include temp and humidity
-            
-            var nextDay1 = response.list[1]
-            var nextDay2 = response.list[2]
-            var nextDay2 = response.list[3]
-            var nextDay2 = response.list[4]
-            var nextDay2 = response.list[5]
+            var count = 0
+            for (var i = 0; i < response.list.length; i++) {
 
-            console.log(nextDay1)
+                if (response.list[i].dt_txt.includes("12:00:00")) {
+                    count++;
+                    // console.log(response.list[i].dt_txt + " day-" + count)
+                    // console.log(response.list[i].main.temp)
+                    // console.log(response.list[i].main.humidity)
+                    // console.log(response.list[i].weather[0].icon)
+                    // var iconSmall = response.weather[0].icon
 
 
+                    var days = $('#day-' + count)
+                    var daysForecast = $("<span>").text(response.list[i].dt_txt)
+                    days.append(daysForecast)
+
+                    var temps = $('#temp-' + count)
+                    var tempsForecast = $("<span>").text(response.list[i].main.temp)
+                    temps.append(tempsForecast).append("°F")
+
+                    var humiditys = $('#humid-' + count)
+                    var humiditysForecast = $("<span>").text(response.list[i].main.humidity)
+                    humiditys.append(humiditysForecast).append("%")
+
+                    // console.log(iconURL)
+                    // var iconURLsmall = "https://openweathermap.org/img/wn/" + iconSmall + ".png"
+
+                    // var icons = $('#smallIcon' + count)
+                    // var iconsForecast = $(`<img src= ${iconURLsmall} />`)
+                    // icons.append(iconsForecast)
+                }
+            }
         });
-
-
-
-
     });
 });
 
