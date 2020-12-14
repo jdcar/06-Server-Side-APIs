@@ -6,10 +6,21 @@
     background-color: white;
 }
 
+.btn-outline-success:visited{
+    background-color: black;
+    border-color: black;
+
+}
+
 .btn-outline-success:hover{
     background-color: black;
     border-color: black;
 
+}
+
+.btn-outline-success:active {
+    color: #a4afa6;
+    border-color: #a4afa6;
 }
 
 #sidebar {
@@ -29,6 +40,21 @@ body {
     background-color: #FFFFF0	;
 }
 
-.navbar {
-    text-align: center;
+.navbar  {
+    justify-content: center;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+#search-history {
+    margin-top: 10px;
+}
+
+h1 {
+    /* font-family: 'Lobster', cursive; */
+    font-family: 'Pacifico', cursive;
+    color:rgb(95, 80, 61)
+
 }

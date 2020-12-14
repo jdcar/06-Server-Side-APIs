@@ -13,6 +13,14 @@ function displayCurrent() {
 
 displayCurrent()
 
+// Hide until city search is done
+$('#temperature').attr('style', 'display:none')
+$('#humidity').attr('style', 'display:none')
+$('#wind-speed').attr('style', 'display:none')
+$('#uv-index').attr('style', 'display:none')
+$('h3').attr('style', 'display:none')
+$('.card-group').attr('style', 'display:none')
+
 
 // Get current weather
 var apiKey = configs.MY_KEY;
@@ -23,10 +31,17 @@ var stateInput = "";
 // event listener
 $("#searchButton").on("click", function (event) {
 
-
     event.preventDefault();
-    // grab search inputs for city and state
+    // Show fields after search
     $('.forecast').text("")
+    $('#temperature').attr('style', 'display:block')
+    $('#humidity').attr('style', 'display:block')
+    $('#wind-speed').attr('style', 'display:block')
+    $('#uv-index').attr('style', 'display:block')
+    $('h3').attr('style', 'display:block')
+    $('.card-group').attr('style', 'display:flex')
+
+    // grab search inputs for city and state
     cityInput = $('#city-input').val()
     stateInput = $('#state-input').val()
 
