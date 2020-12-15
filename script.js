@@ -22,7 +22,6 @@ var fromStorage = localStorage.getItem("city_state")
 
 // If there's something in local storage
 if (fromStorage) {
-    console.log("something is in storage")
     cityInput = JSON.parse(fromStorage).city
     stateInput = JSON.parse(fromStorage).state
     getWeather()
@@ -38,8 +37,6 @@ if (fromStorage) {
     $('h3').attr('style', 'display:none')
     $('.card-group').attr('style', 'display:none')
     // Do the event listener
-    // Get the weather
-
 
 }
 
@@ -61,12 +58,37 @@ $("#searchButton").on("click", function (event) {
 
     // search history save
     var searchHistory = $("#search-history")
-    var searchHistoryList = $("<li class='list-group-item'>").text(cityInput + " " + stateInput)
-    searchHistory.prepend(searchHistoryList)
-    // 
 
+    if (cityInput != "" && stateInput != "") {
+        var searchHistoryList = $("<li class='list-group-item'>").text("city: " + cityInput + " " + "state/country: " + stateInput)
+        searchHistory.prepend(searchHistoryList)
+    } else if (cityInput != "" && stateInput === ""){
+        var searchHistoryList = $("<li class='list-group-item'>").text("city: " + cityInput)
+        searchHistory.prepend(searchHistoryList)
+    }
+    // 
+    historySearch()
     getWeather();
 });
+historySearch()
+
+function historySearch() {
+
+    $(".list-group-item").on("click", function (event) {
+
+        event.preventDefault();
+
+        var searchText = this
+
+        console.log(searchText)
+
+        // var historyCity = searchText(/(city: )/())
+            // grab city and state from DOM
+
+
+    });
+}
+
 
 function getWeather() {
 
@@ -142,21 +164,20 @@ function getWeather() {
             var uvIndex = response.value
             // var uvIndex = ;
             $('#uv-index').text("UV Index: " + uvIndex)
-            console.log(response)
 
             // if uv index is 0 to 2
-            if (uvIndex > 0 && uvIndex < 3){
+            if (uvIndex > 0 && uvIndex < 3) {
                 $('#uv-index').attr('style', 'background-color: #90EE90')
-            } else if (uvIndex >= 3 && uvIndex < 5){
+            } else if (uvIndex >= 3 && uvIndex < 5) {
                 $('#uv-index').attr('style', 'background-color: yellow')
-            } else if (uvIndex >= 6 && uvIndex < 8){
+            } else if (uvIndex >= 6 && uvIndex < 8) {
                 $('#uv-index').attr('style', 'background-color: orange')
-            } else if (uvIndex >= 8 && uvIndex < 11){
+            } else if (uvIndex >= 8 && uvIndex < 11) {
                 $('#uv-index').attr('style', 'background-color: red')
             } else {
                 $('#uv-index').attr('style', 'background-color: purple')
-            } 
-        
+            }
+
             // if uv index is over 11
             // it's purple
         });
