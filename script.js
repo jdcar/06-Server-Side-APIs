@@ -165,7 +165,7 @@ function getWeather() {
         $('#city-name').append(`<img id="icons" src= ${iconURLlarge} />`)
 
 
-        var queryForUv = `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiKey}`
+        var queryForUv = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiKey}`
 
         $.ajax({
             url: queryForUv,
@@ -195,7 +195,7 @@ function getWeather() {
 
         // 5 day forecast 
 
-        var urlFiveDay = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&units=imperial&appid=${apiKey}`
+        var urlFiveDay = `https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&units=imperial&appid=${apiKey}`
 
 
         $.ajax({
