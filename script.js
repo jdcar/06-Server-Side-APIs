@@ -60,11 +60,12 @@ $("#searchButton").on("click", function (event) {
     var searchHistory = $("#search-history")
 
     if (cityInput != "" && stateInput != "") {
-        var searchHistoryList = $("<li class='list-group-item'>").text("city: " + cityInput + " " + "state/country: " + stateInput)
+        var searchHistoryList = $("<li class='list-group-item'>").text(cityInput + " | " + stateInput)
         searchHistory.prepend(searchHistoryList)
-    } else if (cityInput != "" && stateInput === ""){
-        var searchHistoryList = $("<li class='list-group-item'>").text("city: " + cityInput)
+    } else if (cityInput != "" && stateInput === "") {
+        var searchHistoryList = $("<li class='list-group-item'>").text(cityInput)
         searchHistory.prepend(searchHistoryList)
+        
     }
     // 
     historySearch()
@@ -78,15 +79,25 @@ function historySearch() {
 
         event.preventDefault();
 
-        var searchText = this
+        // var target = $(event)
+        var target = this.innerHTML
+        console.log(target)
 
-        console.log(searchText)
-
-        // var historyCity = searchText(/(city: )/())
-            // grab city and state from DOM
-
-
+        if (JSON.stringify(target).includes("|")) {
+            console.log(JSON.stringify(target))
+            cityInput = JSON.stringify(target).replace(/(^\")(.+)( \| )(.+)(\"$)/, "$2")
+            stateInput = JSON.stringify(target).replace(/(^\")(.+)( \| )(.+)(\"$)/, "$4")
+            // console.log(cityInput)
+            // console.log(stateInput)
+            getWeather()
+        } else {
+            cityInput = JSON.stringify(target).replace(/(^\")(.+)(\"$)/, "$2")
+            console.log(JSON.stringify(target))
+            getWeather()
+        }
+        
     });
+
 }
 
 
@@ -175,7 +186,7 @@ function getWeather() {
             } else if (uvIndex >= 8 && uvIndex < 11) {
                 $('#uv-index').attr('style', 'background-color: red')
             } else {
-                $('#uv-index').attr('style', 'background-color: purple')
+                $('#uv-index').attr('style', 'background-color: #DA70D6')
             }
 
             // if uv index is over 11
@@ -205,19 +216,19 @@ function getWeather() {
 
                     var days = $('#day-' + count)
                     var daysForecast = $("<span>").text(dateWithoutTime)
-                    days.append(daysForecast)
+                    days.html(daysForecast)
 
                     var temps = $('#temp-' + count)
                     var tempsForecast = $("<span>").text(parseInt(response.list[i].main.temp))
-                    temps.append(tempsForecast).append("°F")
+                    temps.html(tempsForecast).append("°F")
 
                     var humiditys = $('#humid-' + count)
                     var humiditysForecast = $("<span>").text(response.list[i].main.humidity)
-                    humiditys.append(humiditysForecast).append("%")
+                    humiditys.html(humiditysForecast).append("%")
 
                     var iconSmall = $('#temp-' + count)
                     var iconsForecast = $(`<img id="icons" src= ${"https://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + ".png"} />`)
-                    iconSmall.append(iconsForecast)
+                    iconSmall.html(iconsForecast)
 
                     // Save everything to local storage
 
@@ -228,12 +239,3 @@ function getWeather() {
 
 }
 
-
-// End render
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
-
-
-// add ons:
-    // country
-    // page load spinner
