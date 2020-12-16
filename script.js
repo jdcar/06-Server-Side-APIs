@@ -89,11 +89,27 @@ function historySearch() {
             stateInput = JSON.stringify(target).replace(/(^\")(.+)( \| )(.+)(\"$)/, "$4")
             // console.log(cityInput)
             // console.log(stateInput)
+
+            var local = {
+                city: cityInput,
+                state: stateInput
+            }
+        
+            localStorage.setItem("city_state", JSON.stringify(local))
+
+
             getWeather()
         } else {
             cityInput = JSON.stringify(target).replace(/(^\")(.+)(\"$)/, "$2")
             console.log(JSON.stringify(target))
             getWeather()
+
+            var local = {
+                city: cityInput,
+                state: stateInput
+            }
+        
+            localStorage.setItem("city_state", JSON.stringify(local))
         }
         
     });
