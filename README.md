@@ -5,7 +5,7 @@ Jamie Carlstone
 - December 17, 2020
 
 * https://github.com/jdcar/06-Server-Side-APIs
-* https://jdcar.github.io/06-Server-Side-APIs/ 
+* https://jdcar.github.io/06-Server-Side-APIs/
 
 
 ## Description

@@ -1,4 +1,7 @@
-
+// Jamie Carlstone
+// Weather Dashboard
+// Unit 6
+// December 17, 2020
 document.cookie = "Set-Cookie: SameSite=None; Secure"
 
 // Insert current date/time into DOM
@@ -242,7 +245,7 @@ function getWeather() {
                     var humiditysForecast = $("<span>").text(response.list[i].main.humidity)
                     humiditys.html(humiditysForecast).append("%")
 
-                    var iconSmall = $('#temp-' + count)
+                    var iconSmall = $('#smallIcon-' + count)
                     var iconsForecast = $(`<img id="icons" src= ${"https://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + ".png"} />`)
                     iconSmall.html(iconsForecast)
 
